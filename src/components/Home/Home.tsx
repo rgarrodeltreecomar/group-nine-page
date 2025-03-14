@@ -1,0 +1,97 @@
+import React from "react";
+import { Box, Button, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { Thumbnail } from '../../components';
+
+export const Home: React.FC = () => {
+  const bgColor = useColorModeValue("blue.500", "blue.200");
+  const textColor = useColorModeValue("white", "gray.800");
+
+  const handleRedirect = () => {
+    window.open("https://turno-facil.vercel.app/", "_blank");
+  };
+
+  return (
+    <Flex
+      direction={{ base: "column", md: "row" }}
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+      bg={useColorModeValue("gray.800", "gray.900")}
+      px={4}
+      gap={{ base: 6, md: 12 }} 
+      pt={{ base: 8, md: 16 }}
+    >
+<motion.div
+        style={{ display: "inline-block" }} 
+        animate={{ y: [0, -10, 0] }} 
+        transition={{
+          duration: 2, 
+          repeat: Infinity, 
+          ease: "easeInOut",
+        }}
+      >
+      <Box
+        border="2px solid"
+        borderColor={bgColor}
+        borderRadius="lg"
+        overflow="hidden"
+        cursor="pointer"
+        onClick={handleRedirect}
+        _hover={{ transform: "scale(1.05)", transition: "transform 0.2s" }}
+        display="inline-block"
+        order={{ base: 1, md: 2 }} 
+      >
+        <Thumbnail size="large" alt="Miniatura de la app" /> 
+      </Box>
+      </motion.div>
+
+      <Flex
+        direction="column"
+        alignItems={{ base: "center", md: "flex-start" }} 
+        textAlign={{ base: "center", md: "left" }}
+        maxWidth={{ base: "100%", md: "50%" }} 
+        order={{ base: 2, md: 1 }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Text
+            fontSize={{ base: "2xl", md: "4xl" }} 
+            fontWeight="bold"
+            color="white"
+          >
+            Somos un grupo de estudiantes
+          </Text>
+          <Text
+            fontSize={{ base: "xl", md: "2xl" }} 
+            color="white"
+            mt={2} 
+          >
+            que participó en una hackathon
+          </Text>
+        </motion.div>
+
+        <Box mt={6}>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button
+              onClick={handleRedirect}
+              bg={bgColor}
+              color={textColor}
+              size="lg"
+              _hover={{ bg: "blue.600" }}
+              _active={{ bg: "blue.700" }}
+            >
+              Visita nuestra app
+            </Button>
+          </motion.div>
+        </Box>
+      </Flex>
+    </Flex>
+  );
+};
