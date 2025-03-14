@@ -66,7 +66,7 @@ export const Navbar: React.FC = () => {
          _hover={{ transform: "scale(1.05)", transition: "transform 0.2s" }}
          cursor="pointer"
          >
-          <Logo alt="Logo Grupo 9" size="medium" /> 
+          <Logo alt="Logo Grupo 9" size="medium" /> <TextComponent variant="title" >Grupo 9™</TextComponent>
         </Box>
 
         <MenuIconButton
@@ -78,13 +78,13 @@ export const Navbar: React.FC = () => {
         <Box
           as={motion.div}
           display={{ base: "none", md: "flex" }}
-          alignItems="center"
+          alignItems="flex-end"
           gap={8} 
           flexGrow={1} 
-          justifyContent="flex-end" 
+          justifyContent="end" 
         >
           {menuItems.map((item) => (
-            <TextComponent key={item.id} onClick={() => scrollToSection(item.id)}>
+            <TextComponent  variant="subtitle" key={item.id} onClick={() => scrollToSection(item.id)}>
               {item.label}
             </TextComponent>
           ))}
@@ -104,7 +104,7 @@ export const Navbar: React.FC = () => {
         >
           <Flex direction="column" alignItems="center" gap={2}>
             {menuItems.map((item) => (
-              <TextComponent key={item.id} onClick={() => scrollToSection(item.id)}>
+              <TextComponent  key={item.id} onClick={() => scrollToSection(item.id)}>
                 {item.label}
               </TextComponent>
             ))}

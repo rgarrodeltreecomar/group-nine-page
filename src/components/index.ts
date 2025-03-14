@@ -4,3 +4,6 @@ export * from './TextComponent/TextComponent';
 export * from './MenuIconButton/MenuIconButton';
 export * from './Home/Home';
 export * from './Thumbnail/Thumbnail';
+export * from './LearnMore/LeanMore';
+export * from './BoxContainer/BoxContainer';
+export * from './ReacCsharpImage/ReactCsharImage';

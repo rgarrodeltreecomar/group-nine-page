@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Button, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { Thumbnail } from '../../components';
+import { Thumbnail, TextComponent } from '../../components';
 
 export const Home: React.FC = () => {
   const bgColor = useColorModeValue("blue.500", "blue.200");
@@ -58,20 +58,14 @@ export const Home: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Text
-            fontSize={{ base: "2xl", md: "4xl" }} 
-            fontWeight="bold"
-            color="white"
-          >
+          <TextComponent variant="title">
             Somos un grupo de estudiantes
-          </Text>
-          <Text
-            fontSize={{ base: "xl", md: "2xl" }} 
-            color="white"
-            mt={2} 
+          </TextComponent>
+          <TextComponent
+            variant="onTitle"
           >
             que participó en una hackathon
-          </Text>
+          </TextComponent>
         </motion.div>
 
         <Box mt={6}>
