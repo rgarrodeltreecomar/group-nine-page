@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { Home, LearnMore, Navbar } from "../components/";
+import { ContactForm, Home, ImageCarousel, LearnMore, Navbar,TeamContainer } from "../components/";
 
 export const LandingPage: React.FC = () => {
   return (
@@ -8,6 +8,9 @@ export const LandingPage: React.FC = () => {
       <Navbar />
       <Home/>
       <LearnMore/>
+      <TeamContainer/>
+      <ImageCarousel/>
+      <ContactForm/>
     </Box>
   );
 };

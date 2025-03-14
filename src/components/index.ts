@@ -7,3 +7,6 @@ export * from './Thumbnail/Thumbnail';
 export * from './LearnMore/LeanMore';
 export * from './BoxContainer/BoxContainer';
 export * from './ReacCsharpImage/ReactCsharImage';
+export * from './ProfleCard/ProfileCard';
+export * from './ImageCarousel/ImageCarousel';
+export * from './ContactForm/ContactForm';

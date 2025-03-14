@@ -8,6 +8,7 @@ import { TextComponent, BoxContainer, ReactCsharImage } from "../../components"
 export const LearnMore: React.FC = () => {
   return (
     <Flex
+        id="saber-mas"
       direction={{ base: "column", md: "row" }}
       alignItems="center"
       justifyContent="center"
@@ -17,13 +18,13 @@ export const LearnMore: React.FC = () => {
       gap={{ base: 6, md: 12 }}
       pt={{ base: 8, md: 16 }}
     >
-        <BoxContainer>
+        <BoxContainer >
         <Flex
           direction="column"
           alignItems="flex-start"
           textAlign="left"
-          width={{ base: "100%", md: "40%" }} // Ancho del texto
-          pr={{ base: 0, md: 1 }} // Espaciado a la derecha
+          width={{ base: "100%", md: "40%" }} 
+          pr={{ base: 0, md: 1 }}
         >
           <motion.div
             initial={{ opacity: 0, y: -20 }}

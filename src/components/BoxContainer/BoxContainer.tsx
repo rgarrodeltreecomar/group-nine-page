@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex, FlexProps, } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 interface BoxContainerProps extends FlexProps {
   children: React.ReactNode;
@@ -7,7 +8,13 @@ interface BoxContainerProps extends FlexProps {
 
 export const BoxContainer: React.FC<BoxContainerProps> = ({ children, ...rest }) => {
   return (
+    <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
     <Flex
+
       direction="row" 
       alignItems="center" o
       justifyContent="space-between"
@@ -24,5 +31,6 @@ export const BoxContainer: React.FC<BoxContainerProps> = ({ children, ...rest })
     >
       {children}
     </Flex>
+    </motion.div>
   );
 };

@@ -24,7 +24,7 @@ export const MenuIconButton: React.FC<MenuIconButtonProps> = ({ isOpen, ...rest 
         _active={{ bg: "#68217A", color: "white" }}
         variant="outline"
         borderColor="#61DAFB"
-        {...filteredRest} // Ahora `aria-label` no se sobrescribirá
+        {...filteredRest}
       />
     </motion.div>
   );
