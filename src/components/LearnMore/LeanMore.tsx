@@ -20,9 +20,10 @@ export const LearnMore: React.FC = () => {
         <BoxContainer>
         <Flex
           direction="column"
-          alignItems={{ base: "flex-start", md: "flex-start" }}
-          textAlign={{ base: "start", md: "left" }}
-          maxWidth={{ base: "100%", md: "50%" }}
+          alignItems="flex-start"
+          textAlign="left"
+          width={{ base: "100%", md: "40%" }} // Ancho del texto
+          pr={{ base: 0, md: 1 }} // Espaciado a la derecha
         >
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -30,7 +31,7 @@ export const LearnMore: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <TextComponent variant="subtitle" hoverVariant="react">
-              Quienes somos
+              ¿Quienes somos?
             </TextComponent>
             <TextComponent variant="title" hoverVariant="react">
               Grupo 9
@@ -39,15 +40,18 @@ export const LearnMore: React.FC = () => {
               Somos un equipo de tres programadores apasionados por la tecnología y el desarrollo de software. Unidos por el desafío de la competencia HackaCode, estamos creando una plataforma innovadora para la gestión de una clínica médica.
             </TextComponent>
           </motion.div>
-          <BoxContainer maxWidth={{ base: "10%", md: "50%" }}>
+          </Flex>
+          <Flex
+          width={{ base: "100%", md: "50%" }} 
+          justifyContent="flex-end" 
+        >
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-        <ReactCsharImage size="large" alt="Miniatura de la app" />
-        </motion.div>
-      </BoxContainer>
+            <ReactCsharImage size="large" alt="Miniatura de la app" />
+          </motion.div>
         </Flex>
       </BoxContainer>
     </Flex>
