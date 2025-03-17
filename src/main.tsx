@@ -4,7 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 import App from "./App";
-import { system } from "./system"; 
+import { system } from "./theme"; 
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

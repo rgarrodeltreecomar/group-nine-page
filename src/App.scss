@@ -1,7 +1,7 @@
 #root {
-  max-width: none; 
-  margin: 0; 
-  padding: 0; 
+  max-width: none;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -41,4 +41,40 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem; 
+  }
+
+  .logo {
+    height: 4em; 
+    padding: 1em; 
+  }
+
+  .card {
+    padding: 1em; 
+  }
+
+  .read-the-docs {
+    font-size: 0.9em; 
+  }
+}
+
+
+@media (max-width: 414px) {
+  .logo {
+    height: 3em;
+    padding: 0.5em; 
+  }
+
+  .card {
+    padding: 0.5em; 
+  }
+
+  .read-the-docs {
+    font-size: 0.8em; 
+  }
 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Image, Flex, useColorModeValue } from "@chakra-ui/react";
+import { Box, Image, Flex } from "@chakra-ui/react";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { images } from "./Images";
+import { useCustomColors } from "../../theme";
 
 
 const MotionBox = motion(Box);
@@ -11,9 +12,10 @@ export const ImageCarousel: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const x = useMotionValue(0);
+  const {carouselBgColor}= useCustomColors();
 
 
-  const carouselBgColor = useColorModeValue("gray.800", "gray.900");
+
   useEffect(() => {
     if (carouselRef.current) {
       setCarouselWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);

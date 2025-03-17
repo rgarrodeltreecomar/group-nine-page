@@ -1,11 +1,13 @@
 import React from "react";
-import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Thumbnail, TextComponent } from '../../components';
+import { useCustomColors } from "../../theme";
 
 export const Home: React.FC = () => {
-  const bgColor = useColorModeValue("blue.500", "blue.200");
-  const textColor = useColorModeValue("white", "gray.800");
+
+  const {bgColor, textColor, carouselBgColor} = useCustomColors();
+
 
   const handleRedirect = () => {
     window.open("https://turno-facil.vercel.app/", "_blank");
@@ -13,16 +15,16 @@ export const Home: React.FC = () => {
 
   return (
     <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                  >
+         initial={{ opacity: 0, y: -20 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{ duration: 0.8 }}
+      >
     <Flex
       direction={{ base: "column", md: "row" }}
       alignItems="center"
       justifyContent="center"
       minHeight="100vh"
-      bg={useColorModeValue("gray.800", "gray.900")}
+      bg={carouselBgColor}
       px={4}
       gap={{ base: 6, md: 12 }} 
       pt={{ base: 8, md: 16 }}

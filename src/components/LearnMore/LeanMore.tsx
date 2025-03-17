@@ -1,11 +1,13 @@
 import React from "react";
-import { Flex, useColorModeValue } from "@chakra-ui/react";
+import { Flex} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { TextComponent, BoxContainer, ReactCsharImage } from "../../components"
+import { useCustomColors } from "../../theme";
 
 
 
 export const LearnMore: React.FC = () => {
+  const {carouselBgColor} = useCustomColors();
   return (
     <Flex
         id="saber-mas"
@@ -13,7 +15,7 @@ export const LearnMore: React.FC = () => {
       alignItems="center"
       justifyContent="center"
       minHeight="100vh"
-      bg={useColorModeValue("gray.800", "gray.900")}
+      bg={carouselBgColor}
       px={4}
       gap={{ base: 6, md: 12 }}
       pt={{ base: 8, md: 16 }}

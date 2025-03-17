@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import { useContactForm } from "../../hooks";
 import { TextComponent } from "../../components";
+import { useCustomColors } from "../../theme";
 
 export const ContactForm: React.FC = () => {
-  const bgColor = useColorModeValue("blue.500", "blue.200");
-  const textColor = useColorModeValue("white", "gray.800");
-  const { formData, form, isLoading, handleChange, handleSubmit } = useContactForm();
+  const {bgColor,textColor} = useCustomColors();
+  const { formData, form, isLoading, handleChange, sendEmailForm } = useContactForm();
 
   return (
     <motion.div
@@ -34,7 +34,7 @@ export const ContactForm: React.FC = () => {
         <Box
           as="form"
           ref={form}
-          onSubmit={handleSubmit}
+          onSubmit={sendEmailForm}
           border="2px solid"
           borderColor={bgColor}
           borderRadius="lg"
