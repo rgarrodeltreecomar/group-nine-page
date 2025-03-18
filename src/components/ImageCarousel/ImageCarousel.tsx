@@ -12,7 +12,7 @@ export const ImageCarousel: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const x = useMotionValue(0);
-  const {carouselBgColor}= useCustomColors();
+  const {carouselBgColor, reactColor}= useCustomColors();
 
 
 
@@ -43,6 +43,7 @@ export const ImageCarousel: React.FC = () => {
     <Box id="tecnologias" overflow="hidden" position="relative" width="100%" bg={carouselBgColor}>
       <MotionBox
         ref={carouselRef}
+        color={reactColor}
         drag="x"
         dragConstraints={{ right: 0, left: -carouselWidth }}
         onDrag={handleDrag}
@@ -53,7 +54,7 @@ export const ImageCarousel: React.FC = () => {
         whileTap={{ cursor: "grabbing" }}
       >
         {[...images, ...images].map((img, index) => ( 
-          <Flex key={index} flex="0 0 auto" width="400px" height="300px" mx={2}>
+          <Flex key={index} flex="0 0 auto" width="300px" height="300px" mx={2}>
             <Image src={img} alt={`Imagen ${index + 1}`} objectFit="cover" borderRadius="lg" />
           </Flex>
         ))}

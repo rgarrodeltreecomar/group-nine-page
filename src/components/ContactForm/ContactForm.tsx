@@ -7,7 +7,7 @@ import { TextComponent } from "../../components";
 import { useCustomColors } from "../../theme";
 
 export const ContactForm: React.FC = () => {
-  const {bgColor,textColor} = useCustomColors();
+  const {csharpColor,textColor} = useCustomColors();
   const { formData, form, isLoading, handleChange, sendEmailForm } = useContactForm();
 
   return (
@@ -36,7 +36,7 @@ export const ContactForm: React.FC = () => {
           ref={form}
           onSubmit={sendEmailForm}
           border="2px solid"
-          borderColor={bgColor}
+          borderColor={csharpColor}
           borderRadius="lg"
           p={6}
           width={{ base: "100%", md: "50%" }}
@@ -83,7 +83,7 @@ export const ContactForm: React.FC = () => {
             >
             <Button
               type="submit"
-              bg={bgColor}
+              bg={csharpColor}
               color={textColor}
               size="lg"
               _hover={{ bg: "blue.600" }}

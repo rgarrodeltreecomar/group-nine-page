@@ -1,12 +1,15 @@
 import React from "react";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Thumbnail, TextComponent } from '../../components';
 import { useCustomColors } from "../../theme";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+
+const MotionIcon = motion(Icon);
 
 export const Home: React.FC = () => {
 
-  const {bgColor, textColor, carouselBgColor} = useCustomColors();
+  const {csharpColor, textColor, carouselBgColor} = useCustomColors();
 
 
   const handleRedirect = () => {
@@ -41,7 +44,7 @@ export const Home: React.FC = () => {
       <Box
         id="inicio"
         border="2px solid"
-        borderColor={bgColor}
+        borderColor={csharpColor}
         borderRadius="lg"
         overflow="hidden"
         cursor="pointer"
@@ -81,16 +84,24 @@ export const Home: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button
-              onClick={handleRedirect}
-              bg={bgColor}
-              color={textColor}
-              size="lg"
-              _hover={{ bg: "blue.600" }}
-              _active={{ bg: "blue.700" }}
-            >
-              Visita nuestra app
-            </Button>
+          <Button
+            onClick={handleRedirect}
+            leftIcon={
+              <MotionIcon
+                as={ExternalLinkIcon}
+                initial={{ scale: 1 }} 
+                whileTap={{ scale: 0.9 }} 
+                transition={{ duration: 0.2 }}
+              />
+            }
+            bg={csharpColor}
+            color={textColor}
+            size="lg"
+            _hover={{ bg: "#9B4F96" }} 
+            _active={{ bg: "#68217A" }} 
+          >
+            Visita nuestra app
+          </Button>
           </motion.div>
         </Box>
       </Flex>
