@@ -27,6 +27,7 @@ export const LearnMore: React.FC = () => {
           textAlign="left"
           width={{ base: "100%", md: "40%" }} 
           pr={{ base: 0, md: 1 }}
+          order={{ base: 1, md: 1 }}
         >
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -45,8 +46,10 @@ export const LearnMore: React.FC = () => {
           </motion.div>
           </Flex>
           <Flex
-          width={{ base: "100%", md: "50%" }} 
-          justifyContent="flex-end" 
+          width={{ base: "100%", md: "50%" }}
+          justifyContent="center"
+          order={{ base: 2, md: 1 }} 
+          mt={{ base: 6, md: 0 }} 
         >
           <motion.div
             initial={{ opacity: 0, y: -20 }}

@@ -53,7 +53,7 @@ export const Home: React.FC = () => {
         display="inline-block"
         order={{ base: 1, md: 2 }} 
       >
-        <Thumbnail size="large" alt="Miniatura de la app" /> 
+        <Thumbnail size={{ base: "medium", md: "large" }} alt="Miniatura de la app" /> 
       </Box>
       </motion.div>
 

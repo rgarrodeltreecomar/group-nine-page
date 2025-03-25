@@ -20,14 +20,11 @@ interface TeamMember {
 }
 
 const ProfileCard = ({ name, role, image, social }: TeamMember) => {
-    const {reactBgColor,textColor,iconColorScheme} = useCustomColors();
-
-
+    const { reactBgColor, textColor, iconColorScheme } = useCustomColors();
 
     return (
         <MotionBox
-            
-            p={12}
+            p={{ base: 6, md: 12 }}
             bg={reactBgColor}
             borderRadius="lg"
             boxShadow="xl"
@@ -35,24 +32,24 @@ const ProfileCard = ({ name, role, image, social }: TeamMember) => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
             width={{ base: "100%", md: "250px" }}
-            maxWidth="80%"
-              mx="auto"
+            mx="auto"
+            mb={{ base: 4, md: 0 }}
         >
             <Image
                 src={image}
                 alt={name}
                 borderRadius="full"
-                boxSize="150px" 
+                boxSize={{ base: "120px", md: "150px" }}
                 mx="auto"
-                mb={6} 
+                mb={{ base: 4, md: 6 }}
             />
-            <Text fontSize="2xl" fontWeight="bold" color={textColor}> 
+            <Text fontSize={{ base: "xl", md: "2xl" }} fontWeight="bold" color={textColor}>
                 {name}
             </Text>
-            <Text fontSize="lg" color="gray.400"> 
+            <Text fontSize={{ base: "md", md: "lg" }} color="gray.400">
                 {role}
             </Text>
-            <Flex justify="center" mt={6} gap={3}> 
+            <Flex justify="center" mt={{ base: 4, md: 6 }} gap={3}>
                 {social.map(({ icon: Icon, url }, index) => (
                     <a key={index} href={url} target="_blank" rel="noopener noreferrer">
                         <IconButton
@@ -60,7 +57,7 @@ const ProfileCard = ({ name, role, image, social }: TeamMember) => {
                             aria-label={name}
                             colorScheme={iconColorScheme}
                             variant="ghost"
-                            size="lg" 
+                            size={{ base: "md", md: "lg" }}
                         />
                     </a>
                 ))}
@@ -70,27 +67,25 @@ const ProfileCard = ({ name, role, image, social }: TeamMember) => {
 };
 
 export const TeamContainer = () => {
-   const {carouselBgColor} = useCustomColors();
+    const { carouselBgColor } = useCustomColors();
 
     return (
-
-        <Box id="equipo"  textAlign="center" p={8} bg={carouselBgColor}>
-        <TextComponent variant="title"
-        >
-       Conocé el equipo
-        </TextComponent>
-        <Flex
-            direction={{ base: "column", md: "row" }}
-            wrap="wrap"
-            justify="center"
-            gap={12}
-            p={10}
-            bg={carouselBgColor}
-        >
-            {teamMembers.map((member, index) => (
-                <ProfileCard key={index} {...member} />
-            ))}
-        </Flex>
+        <Box id="equipo" textAlign="center" p={{ base: 4, md: 8 }} bg={carouselBgColor}>
+            <TextComponent variant="title">
+                Conocé el equipo
+            </TextComponent>
+            <Flex
+                direction={{ base: "column", md: "row" }}
+                wrap="wrap"
+                justify="center"
+                gap={{ base: 6, md: 12 }}
+                p={{ base: 4, md: 10 }}
+                bg={carouselBgColor}
+            >
+                {teamMembers.map((member, index) => (
+                    <ProfileCard key={index} {...member} />
+                ))}
+            </Flex>
         </Box>
     );
 };

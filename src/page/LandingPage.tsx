@@ -1,16 +1,28 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { ContactForm, Home, ImageCarousel, LearnMore, Navbar,TeamContainer } from "../components/";
+import { ContactForm, Home, ImageCarousel, LearnMore, Navbar, ScrollAnimation, TeamContainer } from "../components/";
 
 export const LandingPage: React.FC = () => {
   return (
-    <Box>
+    <Box width="100%" overflowX="hidden"> 
       <Navbar />
-      <Home/>
-      <LearnMore/>
-      <TeamContainer/>
-      <ImageCarousel/>
-      <ContactForm/>
+      
+      <Box as="main" 
+        maxWidth="1200px"   
+        margin="0 auto"    
+        paddingX={4}        
+        boxSizing="border-box" 
+      >
+        <ScrollAnimation><Home /></ScrollAnimation>
+        <ScrollAnimation><LearnMore /></ScrollAnimation>
+        <ScrollAnimation><TeamContainer /></ScrollAnimation>
+        <ScrollAnimation>
+          <Box width="100vw" position="relative" left="50%" right="50%" marginLeft="-50vw" marginRight="-50vw">
+            <ImageCarousel />
+          </Box>
+        </ScrollAnimation>
+        <ScrollAnimation><ContactForm /></ScrollAnimation>
+      </Box>
     </Box>
   );
 };

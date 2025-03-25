@@ -4,7 +4,9 @@ export const system = extendTheme({
   colors: {
     primary: "#512BD4",
     secondary: "#61DAFB",
-    background: "#20232A", 
+    background: "#1A202C", 
+
+
     backgroundAlt: "#2D2D2D",
     text: "#FFFFFF",
   },

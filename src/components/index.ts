@@ -10,3 +10,5 @@ export * from './ReacCsharpImage/ReactCsharImage';
 export * from './ProfleCard/ProfileCard';
 export * from './ImageCarousel/ImageCarousel';
 export * from './ContactForm/ContactForm';
+export * from './ScrollAnimation/ScrollAnimation';
+export * from './ImageCarousel/Images';

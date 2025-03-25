@@ -1,41 +1,44 @@
-import React from 'react';
-import { Box, Image } from '@chakra-ui/react';
+import React from "react";
+import { Box, Image } from "@chakra-ui/react";
 
 interface ReactCsharImageProps {
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   alt?: string;
 }
 
-export const ReactCsharImage: React.FC<ReactCsharImageProps> = ({ size = 'medium', alt = 'Thumbnail' }) => {
-  let width: number;
-  let height: number;
+export const ReactCsharImage: React.FC<ReactCsharImageProps> = ({
+  size = "medium",
+  alt = "Thumbnail",
+}) => {
+  let maxWidth: string;
+  let maxHeight: string;
 
   switch (size) {
-    case 'small':
-      width = 150;
-      height = 100;
+    case "small":
+      maxWidth = "150px";
+      maxHeight = "100px";
       break;
-    case 'medium':
-      width = 300;
-      height = 200;
+    case "medium":
+      maxWidth = "300px";
+      maxHeight = "200px";
       break;
-    case 'large':
-      width = 450;
-      height = 300;
+    case "large":
+      maxWidth = "450px";
+      maxHeight = "300px";
       break;
     default:
-      width = 300;
-      height = 200;
+      maxWidth = "300px";
+      maxHeight = "200px";
   }
 
   return (
-    <Box width={`${width}px`} height={`${height}px`} overflow="hidden">
-      <Image 
+    <Box width="100%" display="flex" justifyContent="center">
+      <Image
         src="/dotnet-core-and-react.jpg"
-        alt={alt} 
-        width="100%"
-        height="100%"
-        objectFit="contain" 
+        alt={alt}
+        maxWidth={{ base: "90%", md: maxWidth }}
+        maxHeight={{ base: "auto", md: maxHeight }}
+        objectFit="contain"
       />
     </Box>
   );

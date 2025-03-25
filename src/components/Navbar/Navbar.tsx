@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex,  useDisclosure } from "@chakra-ui/react";
 import { motion,useAnimation } from "framer-motion";
-import { Logo, TextComponent, MenuIconButton } from '../../components'; 
+import { LogoGroup, TextComponent, MenuIconButton } from '../../components'; 
+import { useCustomColors } from "../../theme";
 
 const menuItems = [
     { id: "inicio", label: "Inicio" },
@@ -16,43 +17,47 @@ export const Navbar: React.FC = () => {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const controls = useAnimation();
+  const {csharpColor} = useCustomColors();
+  const [activeSection, setActiveSection] = useState<string>("inicio");
 
-  const scrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-        const offset = section.offsetTop;
-        const startPosition = window.scrollY;
-        const distance = offset - startPosition;
 
-        const duration = 800;
-        let startTime: number | null = null;
+const scrollToSection = (id: string) => {
+  const section = document.getElementById(id);
+  if (section) {
+    const navbarHeight = 150; 
+    const offset = section.offsetTop - navbarHeight;
+    
+    const startPosition = window.scrollY;
+    const distance = offset - startPosition;
 
-        const animateScroll = (currentTime: number) => {
-            if (!startTime) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
+    const duration = 800;
+    let startTime: number | null = null;
 
-            window.scrollTo(0, startPosition + distance * progress);
+    const animateScroll = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
 
-            if (timeElapsed < duration) {
-                requestAnimationFrame(animateScroll);
-            }
-        };
+      window.scrollTo(0, startPosition + distance * progress);
 
+      if (timeElapsed < duration) {
         requestAnimationFrame(animateScroll);
-        onToggle();
+      }
+    };
 
+    requestAnimationFrame(animateScroll);
+    onToggle();
 
-        controls.start({
-            scale: 1.1,
-            transition: { duration: 0.2 },
-        }).then(() => {
-            controls.start({
-                scale: 1,
-                transition: { duration: 0.2 },
-            });
-        });
-    }
+    controls.start({
+      scale: 1.1,
+      transition: { duration: 0.2 },
+    }).then(() => {
+      controls.start({
+        scale: 1,
+        transition: { duration: 0.2 },
+      });
+    });
+  }
 };
 
   const reload = () => {
@@ -74,11 +79,30 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSection = entries.find((entry) => entry.isIntersecting);
+        if (visibleSection) {
+          setActiveSection(visibleSection.target.id);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    menuItems.forEach((item) => {
+      const section = document.getElementById(item.id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Box
         bg="gray.800"
         color="white"
-        position="sticky"
+         position="fixed"
         top={0}
         zIndex={1000}
         width="100%"
@@ -102,7 +126,7 @@ export const Navbar: React.FC = () => {
                 _hover={{ transform: "scale(1.05)", transition: "transform 0.2s" }}
                 cursor="pointer"
             >
-                <Logo alt="Logo Grupo 9" size="medium" />
+                <LogoGroup  alt="Logo Grupo 9" size="medium" />
                 <TextComponent variant="title">Grupo 9™</TextComponent>
             </Box>
 
@@ -122,42 +146,55 @@ export const Navbar: React.FC = () => {
             >
                 {menuItems.map((item) => (
                     <TextComponent
-                        variant="subtitle"
-                        key={item.id}
-                        onClick={() => scrollToSection(item.id)}
-                        cursor="pointer"
-                        _hover={{ color: "blue.200" }} 
+                    key={item.id}
+                    variant="subtitle"
+                    hoverVariant="csharp"
+                    textColor={activeSection === item.id ?csharpColor : "white"}
+                    fontWeight={activeSection === item.id ? "bold" : "normal"}
+                    onClick={() => scrollToSection(item.id)}
                     >
-                        {item.label}
+                    {item.label}
                     </TextComponent>
                 ))}
             </Box>
             <Box
-                as={motion.div}
-                initial={false}
-                animate={isOpen ? "open" : "closed"}
-                variants={{
-                    open: { opacity: 1, y: 0 },
-                    closed: { opacity: 0, y: -20 },
-                }}
-                display={{ base: isOpen ? "block" : "none", md: "none" }}
-                width="full"
-                mt={4}
-                bg="gray.800"
-            >
-                <Flex direction="column" alignItems="center" gap={2}>
-                    {menuItems.map((item) => (
-                        <TextComponent
-                            key={item.id}
-                            onClick={() => scrollToSection(item.id)}
-                            cursor="pointer"
-                            _hover={{ color: "blue.200" }}
-                        >
-                            {item.label}
-                        </TextComponent>
-                    ))}
-                </Flex>
-            </Box>
+                    as={motion.div}
+                    initial={{ opacity: 0, x: "-100%" }}
+                    animate={{
+                        opacity: 1,
+                        x: isOpen ? "0%" : "-100%",
+                        transition: { type: "spring", stiffness: 100 }
+                    }}
+                    exit={{ opacity: 0, x: "-100%" }}
+                    position="fixed"
+                    left={0}
+                    top="150px" 
+                    width="100%"
+                    height="calc(100vh - 150px)" 
+                    bg="gray.800"
+                    display={{ base: isOpen ? "block" : "none", md: "none" }}
+                    zIndex={999}
+                    px={4}
+                    py={8}
+                >
+                    <Flex direction="column" alignItems="center" gap={6}>
+                        {menuItems.map((item) => (
+                            <TextComponent
+                                key={item.id}
+                                onClick={() => scrollToSection(item.id)}
+                                cursor="pointer"
+                                fontSize="xl"
+                                _hover={{ 
+                                    color: "blue.200",
+                                    transform: "translateX(10px)",
+                                    transition: "all 0.3s ease"
+                                }}
+                            >
+                                {item.label}
+                            </TextComponent>
+                        ))}
+                    </Flex>
+                </Box>
         </Flex>
     </Box>
 );

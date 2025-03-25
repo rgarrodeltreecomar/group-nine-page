@@ -4,9 +4,10 @@ import React from 'react';
 interface LogoComponentProps {
   size?: 'small' | 'medium' | 'large';
   alt?: string;
+  
 }
 
-export const Logo: React.FC<LogoComponentProps> = ({ size = 'medium', alt }) => {
+export const LogoGroup: React.FC<LogoComponentProps> = ({ size = 'medium', alt }) => {
   let width: number;
   let height: number;
 
