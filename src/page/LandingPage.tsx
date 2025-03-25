@@ -7,7 +7,7 @@ export const LandingPage: React.FC = () => {
     <Box width="100%" overflowX="hidden"> 
       <Navbar />
       
-      <Box as="main" 
+      <Box 
         maxWidth="1200px"   
         margin="0 auto"    
         paddingX={4}        
@@ -17,7 +17,7 @@ export const LandingPage: React.FC = () => {
         <ScrollAnimation><LearnMore /></ScrollAnimation>
         <ScrollAnimation><TeamContainer /></ScrollAnimation>
         <ScrollAnimation>
-          <Box width="100vw" position="relative" left="50%" right="50%" marginLeft="-50vw" marginRight="-50vw">
+        <Box width="100%">
             <ImageCarousel />
           </Box>
         </ScrollAnimation>

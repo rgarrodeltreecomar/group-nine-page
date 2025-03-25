@@ -64,7 +64,7 @@ export const ImageCarousel: React.FC = () => {
       const spacing = imageSpacing.md * 2;
       const imageWidthWithMargin = imageWidth + spacing;
     
-      const normalizedX = ((latest % (carouselWidth * 2)) + (carouselWidth * 2)) % (carouselWidth * 2);
+      const normalizedX = ((latest % carouselWidth) + carouselWidth) % carouselWidth;
       const progress = normalizedX / imageWidthWithMargin;
       
       const newIndex = Math.floor(progress) % images.length;

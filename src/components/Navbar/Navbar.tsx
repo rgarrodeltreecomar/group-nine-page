@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
 const scrollToSection = (id: string) => {
   const section = document.getElementById(id);
   if (section) {
-    const navbarHeight = 150; 
+    const navbarHeight = 120; 
     const offset = section.offsetTop - navbarHeight;
     
     const startPosition = window.scrollY;

@@ -13,29 +13,29 @@ export const useCarrusel = (imageSize: { lg: string }, imageSpacing: { md: numbe
 
   const updateCarouselWidth = useCallback(() => {
     if (carouselRef.current) {
-      const totalWidth = carouselRef.current.scrollWidth / 2;
+      const totalWidth = carouselRef.current.scrollWidth;
       setCarouselWidth(totalWidth - carouselRef.current.offsetWidth);
+
     }
   }, []);
 
   const startCarousel = useCallback(
     (scrollDirection: "left" | "right") => {
       const targetX = scrollDirection === "left" ? -carouselWidth : carouselWidth;
-      
+  
       controls.start({
         x: targetX,
         transition: {
           duration: images.length * 5,
           ease: "linear",
-          repeat: Infinity,
-          repeatType: "loop",
-          from: scrollDirection === "left" ? 0 : -carouselWidth
         },
       });
+  
       setDirection(scrollDirection);
     },
     [controls, carouselWidth]
   );
+  
 
   const handleDragStart = () => {
     setIsDragging(true);
@@ -44,46 +44,71 @@ export const useCarrusel = (imageSize: { lg: string }, imageSpacing: { md: numbe
 
   const handleDragEnd = useCallback((_: unknown, info: PanInfo) => {
     setIsDragging(false);
+    
+    // Calcular el ancho con margen
+    const imageWidth = parseInt(imageSize.lg.replace("px", ""), 10);
+    const spacing = imageSpacing.md * 2;
+    const imageWidthWithMargin = imageWidth + spacing;
+  
     const newDirection = info.velocity.x > 0 ? "right" : "left";
-    startCarousel(newDirection);
-  }, [startCarousel]);
+    const currentX = count.get();
+    const maxOffset = carouselWidth / 2;
+    const minOffset = -maxOffset;
+    
+    let newX = newDirection === "left" 
+      ? currentX - imageWidthWithMargin 
+      : currentX + imageWidthWithMargin;
+    
+    // Ajustar límites (eliminar duplicados)
+    if (newX < minOffset) newX = 0;
+    else if (newX > maxOffset) newX = -maxOffset;
+    
+    controls.start({
+      x: newX,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    });
+    
+    setDirection(newDirection);
+  }, [count, controls, imageSize, imageSpacing, carouselWidth]); // Añadir carouselWidth a dependencias
 
   const handleDotClick = useCallback((targetIndex: number) => {
     controls.stop();
     const imageWidth = parseInt(imageSize.lg.replace("px", ""), 10);
     const spacing = imageSpacing.md * 2;
     const imageWidthWithMargin = imageWidth + spacing;
-    const singleSetWidth = images.length * imageWidthWithMargin;
 
+  
     const targetX = -targetIndex * imageWidthWithMargin;
-    const currentX = count.get();
-
-    const diff1 = Math.abs(currentX - targetX);
-    const diff2 = Math.abs(currentX - (targetX - singleSetWidth));
-    const finalX = diff1 < diff2 ? targetX : targetX - singleSetWidth;
-
-    controls.start({ 
-      x: finalX, 
-      transition: { 
-        duration: 0.5, 
+  
+    controls.start({
+      x: targetX,
+      transition: {
+        duration: 0.5,
         ease: "easeInOut",
-        onComplete: () => startCarousel(direction)
-      } 
+      },
     });
+  
     setActiveIndex(targetIndex);
-  }, [controls, count, imageSize, imageSpacing, startCarousel, direction]);
+  }, [controls, imageSize, imageSpacing]);
+  
 
   useEffect(() => {
     const unsubscribe = count.onChange((latest) => {
+      if (!carouselWidth) return; // Validación adicional
+      
       const imageWidth = parseInt(imageSize.lg.replace("px", ""), 10);
       const spacing = imageSpacing.md * 2;
       const imageWidthWithMargin = imageWidth + spacing;
-      const normalizedX = ((latest % (carouselWidth * 2)) + (carouselWidth * 2)) % (carouselWidth * 2);
-      const progress = normalizedX / imageWidthWithMargin;
       
+      const normalizedX = latest % carouselWidth;
+      const progress = normalizedX / imageWidthWithMargin;
+  
       setActiveIndex(Math.floor(progress) % images.length);
     });
-
+  
     return () => unsubscribe();
   }, [count, imageSize, imageSpacing, carouselWidth]);
 
