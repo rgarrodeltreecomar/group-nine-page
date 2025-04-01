@@ -45,7 +45,7 @@ export const useCarrusel = (imageSize: { lg: string }, imageSpacing: { md: numbe
   const handleDragEnd = useCallback((_: unknown, info: PanInfo) => {
     setIsDragging(false);
     
-    // Calcular el ancho con margen
+
     const imageWidth = parseInt(imageSize.lg.replace("px", ""), 10);
     const spacing = imageSpacing.md * 2;
     const imageWidthWithMargin = imageWidth + spacing;
@@ -59,7 +59,7 @@ export const useCarrusel = (imageSize: { lg: string }, imageSpacing: { md: numbe
       ? currentX - imageWidthWithMargin 
       : currentX + imageWidthWithMargin;
     
-    // Ajustar límites (eliminar duplicados)
+
     if (newX < minOffset) newX = 0;
     else if (newX > maxOffset) newX = -maxOffset;
     
